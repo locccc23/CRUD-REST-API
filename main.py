@@ -88,6 +88,24 @@ async def read_campaign(id: int, session: SessionDep):
         raise HTTPException (status_code=404)
     return {"data": data}
 
+@app.post("/campaigns", status_code=201, responde_mode=Response[Campaign])
+async def create_campaign(campaign: Campaign, session: SessionDep):
+    session.add(campaign)
+    session.commit()
+    session.refresh(campaign)
+    return {data: campaign}
+
+
+
+
+
+
+
+
+
+
+
+
 # @app.get("/campaigns")
 # async def read_camp():
 #     return {'campaigns': data}
